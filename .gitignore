@@ -1,0 +1,38 @@
+# VSCode
+.vscode/
+
+#MacOS
+.DS_Store
+
+# Build Directory
+build/
+
+# Prerequisites
+*.d
+
+# Objects and Output
+*.o
+*.elf
+*.eep
+*.cache
+
+# Linker Output
+*.ilk
+*.map
+*.exp
+
+# Precompiled Headers
+*.gch
+*.pch
+
+# Libraries
+*.lib
+*.a
+*.la
+*.lo
+
+# Binaries
+*.bin
+*.out
+*.app
+*.hex
