@@ -20,8 +20,8 @@ void CMeter::reset(void) {
 }
 
 void CMeter::loop(void) {
-  //Capacitor under test between this->out_pin and this->in_pin
-  //Rising high edge on this->out_pin
+  //Capacitor under test between out_pin and in_pin
+  //Rising high edge on out_pin
   pinMode(this->in_pin, INPUT);
   digitalWrite(this->out_pin, HIGH);
   int val = analogRead(this->in_pin);
@@ -35,7 +35,7 @@ void CMeter::loop(void) {
 
     //Calculate and print result
 
-    float capacitance = (float)val * IN_CAP_TO_GND / (float)(MAX_ADC_VALUE - val);
+    float capacitance = (float)val * this->IN_CAP_TO_GND / (float)(this->MAX_ADC_VALUE - val);
 
     Serial.print(F("Capacitance Value = "));
     Serial.print(capacitance, 3);
@@ -79,7 +79,7 @@ void CMeter::loop(void) {
     digitalWrite(this->in_pin, LOW);
 
     //Calculate and print result
-    float capacitance = -(float)t / R_PULLUP / log(1.0 - (float)val / (float)MAX_ADC_VALUE);
+    float capacitance = -(float)t / this->R_PULLUP / log(1.0 - (float)val / (float)this->MAX_ADC_VALUE);
 
     Serial.print(F("Capacitance Value = "));
     if (capacitance > 1000.0) {
