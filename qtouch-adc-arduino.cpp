@@ -22,13 +22,13 @@ void QTouch::loop(void) {
   // 4 measurements are taken and averaged to improve noise immunity
   for (int i=0; i<4; i++) {
     // first measurement: charge touch probe, discharge ADC s&h cap, connect the two, measure the volage
-    adc0+= this->probe(this->tpin0, this->tpin1, false); // accumulate the results for the averaging
+    this->adc0 += this->probe(this->tpin0, this->tpin1, false); // accumulate the results for the averaging
 
     // second measurement:discharge touch probe, charge ADC s&h cap, connect the two, measure the volage
-    adc1+= this->probe(this->tpin0, this->tpin1, true); // accumulate the results for the averaging
+    this->adc1 += this->probe(this->tpin0, this->tpin1, true); // accumulate the results for the averaging
   }
-  adc0>>=2; // divide the accumulated measurements by 16
-  adc1>>=2;
+  this->adc0 >>= 2; // divide the accumulated measurements by 16
+  this->adc1 >>= 2;
 
   time= micros() - time;
  
@@ -36,10 +36,10 @@ void QTouch::loop(void) {
   probe_val= adc0-adc1; // the value of adc0 (probe charged) gets higher when the probe ist touched, the value of adc1 (s&h charged) gets lower when the probe ist touched, so, it has to be be subtracted to amplify the detection accuracy
   
   // calculate the index to the LED fading table
-  int16_t idx= (probe_val-TOUCH_VALUE_BASELINE); // offset probe_val by value of untouched probe
-  if(idx<0) idx= 0; // limit the index!!!
-  idx/= TOUCH_VALUE_SCALE; // scale the index
-  if(idx>31) idx= 31; // limit the index!!!
+  int16_t idx= (this->probe_val - TOUCH_VALUE_BASELINE); // offset probe_val by value of untouched probe
+  if(idx<0) idx = 0; // limit the index!!!
+  idx /= TOUCH_VALUE_SCALE; // scale the index
+  if(idx>31) idx = 31; // limit the index!!!
 
   // print some info to the serial
   Serial.print(time);
@@ -53,10 +53,10 @@ void QTouch::loop(void) {
   Serial.println(idx);
   
   // fade the LED
-  analogWrite(9, ledFadeTable[idx]);
+  analogWrite(9, this->ledFadeTable[idx]);
   
-  adc0= 0; // clear the averaging variables for the next run
-  adc1= 0;
+  this->adc0 = 0; // clear the averaging variables for the next run
+  this->adc1 = 0;
 }
 
 uint16_t QTouch::probe(uint8_t pin, uint8_t partner, bool dir) {
