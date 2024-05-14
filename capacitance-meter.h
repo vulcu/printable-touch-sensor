@@ -6,6 +6,14 @@
 
 class CMeter {
   public:
+    struct result_t {
+      float capacitance;
+      uint32_t chargeTime;
+      uint32_t dischargeTime;
+      uint16_t adc;
+      bool isLargeCapValue;
+    }result;
+
     CMeter(uint8_t in_pin, uint8_t out_pin);
 
     void init(void);

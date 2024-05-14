@@ -37,11 +37,11 @@ void CMeter::loop(void) {
 
     float capacitance = (float)val * this->IN_CAP_TO_GND / (float)(this->MAX_ADC_VALUE - val);
 
-    Serial.print(F("Capacitance Value = "));
-    Serial.print(capacitance, 3);
-    Serial.print(F(" pF ("));
-    Serial.print(val);
-    Serial.println(F(") "));
+    // Serial.print(F("Capacitance Value = "));
+    // Serial.print(capacitance, 3);
+    // Serial.print(F(" pF ("));
+    // Serial.print(val);
+    // Serial.println(F(") "));
   }
   else {
     //Big capacitor - so use RC charging method
@@ -81,22 +81,22 @@ void CMeter::loop(void) {
     //Calculate and print result
     float capacitance = -(float)t / this->R_PULLUP / log(1.0 - (float)val / (float)this->MAX_ADC_VALUE);
 
-    Serial.print(F("Capacitance Value = "));
-    if (capacitance > 1000.0) {
-      Serial.print(capacitance / 1000.0, 2);
-      Serial.print(F(" uF"));
-    }
-    else {
-      Serial.print(capacitance, 2);
-      Serial.print(F(" nF"));
-    }
+    // Serial.print(F("Capacitance Value = "));
+    // if (capacitance > 1000.0) {
+    //   Serial.print(capacitance / 1000.0, 2);
+    //   Serial.print(F(" uF"));
+    // }
+    // else {
+    //   Serial.print(capacitance, 2);
+    //   Serial.print(F(" nF"));
+    // }
 
-    Serial.print(F(" ("));
-    Serial.print(digVal == 1 ? F("Normal") : F("HighVal"));
-    Serial.print(F(", t= "));
-    Serial.print(t);
-    Serial.print(F(" us, ADC= "));
-    Serial.print(val);
-    Serial.println(F(")"));
+    // Serial.print(F(" ("));
+    // Serial.print(digVal == 1 ? F("Normal") : F("HighVal"));
+    // Serial.print(F(", t= "));
+    // Serial.print(t);
+    // Serial.print(F(" us, ADC= "));
+    // Serial.print(val);
+    // Serial.println(F(")"));
   }
 }

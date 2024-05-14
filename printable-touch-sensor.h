@@ -27,11 +27,11 @@
   #define TERM_TIMEOUT_MILLISECONDS (10U)
 
   // CMeter pins
-  #define CMETER_IN_PIN  (A0)
-  #define CMETER_OUT_PIN (A2)
+  #define CMETER_PIN0_IN  (A0)
+  #define CMETER_PIN0_OUT (A2)
 
   // QTouch pins
-  #define QTOUCH_TPIN0  (0U)
-  #define QTOUCH_TPIN1  (1U)
+  // #define QTOUCH_TPIN0  (0U)
+  // #define QTOUCH_TPIN1  (1U)
 
 #endif
