@@ -59,8 +59,7 @@ void CMeter::loop(void) {
 
     //Charge to a fairly arbitrary level mid way between 0 and 5V
     //Best not to use analogRead() here because it's not really quick enough
-    do
-    {
+    do {
       digVal = digitalRead(this->out_pin);
       unsigned long u2 = micros();
       t = u2 > u1 ? u2 - u1 : u1 - u2;

@@ -10,7 +10,7 @@
 
 #include "printable-touch-sensor.h"
 
-TerminalCommander::TerminalCommander Terminal(&Serial, &Wire);
+TerminalCommander::Terminal Terminal(&Serial, &Wire);
 
 CMeter Cmeter(CMETER_PIN0_IN, CMETER_PIN0_OUT);
 // QTouch Qtouch(QTOUCH_TPIN0, QTOUCH_TPIN1);
