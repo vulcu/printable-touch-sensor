@@ -31,7 +31,7 @@
   #define CMETER_PIN0_OUT (A2)
 
   // QTouch pins
-  // #define QTOUCH_TPIN0  (0U)
-  // #define QTOUCH_TPIN1  (1U)
+  #define QTOUCH_TPIN0  (0U)
+  #define QTOUCH_TPIN1  (1U)
 
 #endif

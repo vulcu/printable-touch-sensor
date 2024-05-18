@@ -13,14 +13,14 @@
 TerminalCommander::Terminal Terminal(&Serial, &Wire);
 
 CMeter Cmeter(CMETER_PIN0_IN, CMETER_PIN0_OUT);
-// QTouch Qtouch(QTOUCH_TPIN0, QTOUCH_TPIN1);
+QTouch Qtouch(QTOUCH_TPIN0, QTOUCH_TPIN1);
 
 // for storing elapsed time in milliseconds since power-on (rolls over after about 50 days)
 uint32_t previous_millis = 0;
 
-// void qtouch_update(char* args, size_t args_size) {
-//   Qtouch.loop();
-// }
+void qtouch_update(char* args, size_t args_size) {
+  Qtouch.loop();
+}
 
 void cmeter_update(char* args, size_t args_size) {
   // if (args == nullptr || args_size == 0) {
@@ -30,24 +30,6 @@ void cmeter_update(char* args, size_t args_size) {
 
   Cmeter.reset();
   Cmeter.loop();
-
-  Serial.print(F("Capacitance Value = "));
-  if (Cmeter.result.capacitance > 1000.0) {
-    Serial.print(Cmeter.result.capacitance / 1000.0, 2);
-    Serial.print(F(" uF"));
-  }
-  else {
-    Serial.print(Cmeter.result.capacitance, 2);
-    Serial.print(F(" nF"));
-  }
-
-  Serial.print(F(" ("));
-  Serial.print(Cmeter.result.isLargeCapValue ? F("Normal") : F("HighVal"));
-  Serial.print(F(", t= "));
-  Serial.print(Cmeter.result.chargeTime);
-  Serial.print(F(" us, ADC= "));
-  Serial.print(Cmeter.result.adc);
-  Serial.println(F(")"));
 }
 
 /*! @brief  Called once prior to loop() following power-on or reset
@@ -64,11 +46,11 @@ void setup() {
   Wire.begin();
   Wire.setClock(I2C_CLK_RATE);
 
-  // Qtouch.init();
+  Qtouch.init();
   Cmeter.init();
 
   // using a pointer to a function that matches type TerminalCommander::user_callback_fn_t
-  // Terminal.onCommand("qtouch", &qtouch_update);
+  Terminal.onCommand("qtouch", &qtouch_update);
 
   // using a pointer to a function that matches type TerminalCommander::user_callback_fn_t
   Terminal.onCommand("cmeter", &cmeter_update);
